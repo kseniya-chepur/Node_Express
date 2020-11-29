@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
     res.render('registration');
 });
 app.get('/error', (req, res) => {
-    res.render('error');
+    res.render('error', { errMsg });
 });
 app.get('/users', (req, res) => {
     if (loginUser) {
@@ -36,6 +36,7 @@ app.post('/registration', (req, res) => {
     const { userName, email, password } = req.body;
         registeredUsers.forEach((user) => {
         if (user.userName === userName || user.email === email) {
+            errMsg = 'This email address or username belongs to a registered user';
             res.redirect('/error');           
         }
     });
@@ -57,6 +58,7 @@ app.post('/login', (req, res) => {
             res.redirect('/users');
         }
     });
+    errMsg = 'You entered wrong email or password during login';
     res.redirect('/error');
 });
 app.post('/logout', (req, res) => {
