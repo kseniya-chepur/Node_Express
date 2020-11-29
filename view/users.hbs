@@ -7,13 +7,18 @@
 </head>
 <body style="text-align: center">
      <a href="/login" style="position: fixed; right: 50px; top: 20px">Logout</a>
+
      {{#if loginUser}}
+
     <h2 >Welcome to the registered users</h2>
+    
     {{#each registeredUsers}}
         <div>{{this.userName}}</div>
         <div>{{this.email}}</div>
         <hr>
     {{/each}}
+
     {{/if}}
+
 </body>
 </html>

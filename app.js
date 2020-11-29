@@ -20,9 +20,11 @@ app.set('views', path.join(process.cwd(), 'view'));
 app.get('/', (req, res) => {
     res.render('registration');
 });
+
 app.get('/error', (req, res) => {
     res.render('error', { errMsg });
 });
+
 app.get('/users', (req, res) => {
     if (loginUser) {
         return res.render('users', { registeredUsers, loginUser });
@@ -32,6 +34,7 @@ app.get('/users', (req, res) => {
 app.get('/login', (req, res) => {
     res.render('login');
 });
+
 app.post('/registration', (req, res) => {
     const { userName, email, password } = req.body;
         registeredUsers.forEach((user) => {
@@ -50,6 +53,7 @@ app.post('/registration', (req, res) => {
         loginUser = true;
         res.redirect('/users');        
 });
+
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
     registeredUsers.forEach((user) => {
@@ -61,6 +65,7 @@ app.post('/login', (req, res) => {
     errMsg = 'You entered wrong email or password during login';
     res.redirect('/error');
 });
+
 app.post('/logout', (req, res) => {
     loginUser = false;
     res.redirect('/login');
